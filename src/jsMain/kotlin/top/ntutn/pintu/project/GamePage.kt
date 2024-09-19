@@ -7,7 +7,7 @@ import io.kvision.panel.gridPanel
 import io.kvision.panel.simplePanel
 import io.kvision.panel.splitPanel
 import io.kvision.redux.RAction
-import io.kvision.redux.createReduxStore
+import io.kvision.redux.createTypedReduxStore
 import io.kvision.routing.Routing
 import io.kvision.state.bind
 import io.kvision.toast.Toast
@@ -91,7 +91,7 @@ fun gameReducer(state: GameStatus, action: GameAction): GameStatus = when (actio
 }
 
 fun Container.gamePage(routing: Routing): Component {
-    val store = createReduxStore(::gameReducer, GameStatus.newGame(3, 3))
+    val store = createTypedReduxStore(::gameReducer, GameStatus.newGame(3, 3))
     return splitPanel {
         simplePanel().bind(store) { state ->
             width = 80.perc

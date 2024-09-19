@@ -28,14 +28,10 @@ kotlin {
             }
             runTask {
                 sourceMaps = false
-                devServer = KotlinWebpackConfig.DevServer(
+                devServerProperty = KotlinWebpackConfig.DevServer(
                     open = false,
                     port = 3000,
-                    proxy = mutableMapOf(
-                        "/kv/*" to "http://localhost:8080",
-                        "/kvsse/*" to "http://localhost:8080",
-                        "/kvws/*" to mapOf("target" to "ws://localhost:8080", "ws" to true)
-                    ),
+                    proxy = mutableListOf(),
                     static = mutableListOf("${layout.buildDirectory.asFile.get()}/processedResources/js/main")
                 )
             }
@@ -54,7 +50,6 @@ kotlin {
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
         implementation("io.kvision:kvision-state:$kvisionVersion")
         implementation("io.kvision:kvision-routing-navigo-ng:$kvisionVersion")
-        implementation("io.kvision:kvision-redux:$kvisionVersion")
         implementation("io.kvision:kvision-redux-kotlin:$kvisionVersion")
     }
     sourceSets["jsTest"].dependencies {
